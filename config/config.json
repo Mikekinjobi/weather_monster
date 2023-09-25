@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "Greatnesssince96",
+    "database": "weather_monster",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "Greatnesssince96",
+    "database": "weather_monster",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "Greatnesssince96",
+    "database": "weather_monster",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
