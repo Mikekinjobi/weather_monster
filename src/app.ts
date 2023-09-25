@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {ErrorRequestHandler} from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
@@ -13,7 +13,7 @@ const connection = async () => {
     try{
         await sequelize.authenticate();
         console.log("database connected")
-        app.listen(port, ()=>{console.log('Server is running on', port)})
+        app.listen(port, ()=>{console.log('Server is running on port', port)})
     }catch (error) {
         console.error('database connection failed');
     }
@@ -32,3 +32,14 @@ app.use('/cities', cityRouter);
 app.use('/temperatures', temperatureRouter);
 app.use('/forecasts', forecastRouter );
 app.use('/webhooks', webhooksRouter);
+
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+    console.error(err.message);
+    if (!err.statusCode) err.statusCode = 500; 
+    res.status(err.statusCode).send({error : err.message})
+};
+
+app.use(errorHandler);
+
+
+    
