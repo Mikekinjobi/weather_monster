@@ -20,7 +20,7 @@ export const postCity = async (req: Request , res: Response) => {
        longitude 
     });
     const id = dataValues.id
-    res.status(200).json({id, name, latitude, longitude});
+    return res.status(200).json({id, name, latitude, longitude});
 }catch(error){
     console.error(error);
 }

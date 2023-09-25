@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getForecast = void 0;
 const sequelize_1 = require("sequelize");
+const forecast_1 = __importDefault(require("../../models/forecast"));
 const temperature_1 = __importDefault(require("../../models/temperature"));
 const moment_1 = __importDefault(require("moment"));
 const getForecast = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -32,10 +33,16 @@ const getForecast = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             min += temperature.min;
             max += temperature.max;
         });
-        const city_id = req.params.city_id;
+        const city_id = Number(req.params.city_id);
         const sample = forecastSample.length;
-        min = min / sample;
-        max = max / sample;
+        min = Math.floor(min / sample);
+        max = Math.floor(max / sample);
+        forecast_1.default.create({
+            city_id,
+            max,
+            min,
+            sample
+        });
         return res.status(200).json({ city_id, max, min, sample });
     }
     catch (error) {

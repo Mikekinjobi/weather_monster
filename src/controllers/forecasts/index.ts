@@ -30,11 +30,16 @@ export const getForecast = async (req: Request , res: Response) => {
         min += temperature.min
         max += temperature.max
     })
-    const city_id = req.params.city_id;
+    const city_id = Number(req.params.city_id);
     const sample = forecastSample.length;
-    min = min/sample;
-    max = max/sample;
-
+    min = Math.floor(min/sample);
+    max = Math.floor(max/sample);
+    Forecast.create({
+        city_id, 
+        max, 
+        min, 
+        sample
+    })
     return res.status(200).json({city_id, max, min, sample});
 
     

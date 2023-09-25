@@ -1,6 +1,5 @@
 import express, {Request, Response} from 'express';
 import Temperature from '../../models/temperature'
-import Webhooks from '../../models/webhooks';
 import { webhookCallback } from '../webhooks';
 
 
@@ -22,7 +21,6 @@ export const postTemp = async (req: Request , res: Response) => {
     ;
     
 }catch(error){
-    console.error(error);
     res.status(500).json({error});
 }
 

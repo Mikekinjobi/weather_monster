@@ -26,7 +26,7 @@ const postCity = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             longitude
         });
         const id = dataValues.id;
-        res.status(200).json({ id, name, latitude, longitude });
+        return res.status(200).json({ id, name, latitude, longitude });
     }
     catch (error) {
         console.error(error);
