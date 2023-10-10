@@ -9,6 +9,14 @@ dotenv_1.default.config();
 const { DB_NAME, DB_USER_NAME, DB_PASSWORD, DB_HOST, DB_DIALECT } = process.env;
 const sequelize = new sequelize_1.Sequelize(DB_NAME, DB_USER_NAME, DB_PASSWORD, {
     host: DB_HOST,
-    dialect: DB_DIALECT
+    port: 5432,
+    dialect: DB_DIALECT,
+    logging: false,
+    dialectOptions: {
+        encrypt: true,
+        ssl: {
+            rejectUnauthorized: true,
+        },
+    },
 });
 exports.default = sequelize;
