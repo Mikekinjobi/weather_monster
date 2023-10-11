@@ -2,8 +2,8 @@ import express from 'express';
 import request from 'supertest';
 import { Op } from 'sequelize'
 import moment from 'moment'
-import City from '../src/models/city';
-import Temperature from '../src/models/temperature';
+import Cities from '../src/models/city';
+import Temperatures from '../src/models/temperature';
 import Forecast from '../src/models/forecast'
 import Webhooks from '../src/models/webhooks';
 import cityRoutes from '../src/routers/cities_route'; 
@@ -40,7 +40,7 @@ describe('testing the cities route', ()=>{
     })
 
     it('can GET a city', async()=>{
-        const city = await City.findOne({where: {name: "test city"}})
+        const city = await Cities.findOne({where: {name: "test city"}})
         const {body, statusCode} = await request(app).get(`/cities/test/${city?.getDataValue('id')}`)
         expect(statusCode).toBe(200);
         expect(body).toEqual({
@@ -64,7 +64,7 @@ describe('testing the cities route', ()=>{
     })
 
     it('can UPDATE a city', async()=>{
-        const city = await City.findOne({where: {name: "test city"}});
+        const city = await Cities.findOne({where: {name: "test city"}});
 
         const {body, statusCode} = await request(app).patch(`/cities/test/${city?.getDataValue('id')}`).send({
             latitude: 15.1234,
@@ -81,7 +81,7 @@ describe('testing the cities route', ()=>{
     })
 
     it('can DELETE a city', async()=>{
-        const city = await City.findOne({where: {name: "test city"}});
+        const city = await Cities.findOne({where: {name: "test city"}});
 
         const {body, statusCode} = await request(app).delete(`/cities/test/${city?.getDataValue('id')}`)
         expect(statusCode).toBe(200);
@@ -125,7 +125,7 @@ describe('testing the forecasts route', ()=>{
         const {body, statusCode} = await request(app).get(`/forecasts/test/1`);
         const TODAY_START = moment().format('YYYY-MM-DD 00:00');
         const NOW = moment().format('YYYY-MM-DD 23:59');
-        const forecastSample = await Temperature.findAll({where: {city_id: 1, createdAt:{
+        const forecastSample = await Temperatures.findAll({where: {city_id: 1, createdAt:{
             [Op.between]: [
             TODAY_START,
             NOW,
