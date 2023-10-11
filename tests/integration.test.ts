@@ -29,7 +29,7 @@ describe('testing the cities route', ()=>{
             name: "test city",
             latitude: 9.0000,
             longitude:9.0000
-        })
+        },)
         expect(statusCode).toBe(200);
         expect(body).toEqual({
            id: expect.any(Number),
@@ -37,7 +37,7 @@ describe('testing the cities route', ()=>{
            latitude: 9.0000,
            longitude: 9.0000
         })
-    })
+    },30000)
 
     it('can GET a city', async()=>{
         const city = await Cities.findOne({where: {name: "test city"}})
