@@ -9,6 +9,7 @@ import sequelize from "../dbConfig";
     callback_url: DataTypes.STRING
   }, {
     sequelize,
+    tableName: 'Webhooks',
     modelName: 'Webhooks',
   });
 

@@ -1,5 +1,5 @@
 import express, {Request, Response} from 'express';
-import Temperature from '../../models/temperature'
+import Temperatures from '../../models/temperature'
 import { webhookCallback } from '../webhooks';
 
 
@@ -8,7 +8,7 @@ export const postTemp = async (req: Request , res: Response) => {
         
     const { city_id , max, min} = req.body;
     const timestamp = Date.now();
-    const {dataValues} = await Temperature.create({
+    const {dataValues} = await Temperatures.create({
        city_id,
        max,
        min,

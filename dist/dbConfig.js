@@ -13,10 +13,10 @@ const sequelize = new sequelize_1.Sequelize(DB_NAME, DB_USER_NAME, DB_PASSWORD, 
     dialect: DB_DIALECT,
     logging: false,
     dialectOptions: {
-        encrypt: true,
         ssl: {
-            rejectUnauthorized: true,
-        },
+            require: true,
+            rejectUnauthorized: false
+        }
     },
 });
 exports.default = sequelize;

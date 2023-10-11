@@ -1,5 +1,5 @@
 import express, {Request, Response} from 'express';
-import City from '../../models/city'
+import Cities from '../../models/city'
 
 interface CityInterface {
     id: number;
@@ -12,9 +12,9 @@ export const postCity = async (req: Request , res: Response) => {
     try{
         
     const { name , latitude, longitude} = req.body;
-    const duplicate = await City.findOne({where: {name: name}})
+    const duplicate = await Cities.findOne({where: {name: name}})
     if(duplicate) return res.status(400).json('you cannot add a duplicate city')
-    const {dataValues} = await City.create({
+    const {dataValues} = await Cities.create({
        name,
        latitude,
        longitude 
@@ -30,7 +30,7 @@ export const postCity = async (req: Request , res: Response) => {
 
 export const findCity = async (req: Request , res: Response) => {
     try{
-        const city = await City.findOne({where: {id: req.params.id}, attributes: ['id', 'name', 'longitude', 'latitude']})
+        const city = await Cities.findOne({where: {id: req.params.id}, attributes: ['id', 'name', 'longitude', 'latitude']})
         res.status(200).json(city);
     }catch(error){
         res.status(500).json({error})
@@ -41,8 +41,8 @@ export const findCity = async (req: Request , res: Response) => {
 
 export const updateCity = async (req: Request , res: Response) => {
     try{
-        await City.update(req.body, {where: {id: req.params.id}})
-        const city = await City.findOne({where: {id: req.params.id}, attributes: ['id', 'name', 'longitude', 'latitude']})
+        await Cities.update(req.body, {where: {id: req.params.id}})
+        const city = await Cities.findOne({where: {id: req.params.id}, attributes: ['id', 'name', 'longitude', 'latitude']})
         res.status(200).json(city);
     }catch(error){
         res.status(500).json({error})
@@ -53,8 +53,8 @@ export const updateCity = async (req: Request , res: Response) => {
 
 export const deleteCity = async (req: Request , res: Response) => {
     try{
-        const city = await City.findOne({where: {id: req.params.id}, attributes: ['id', 'name', 'longitude', 'latitude']});
-        await City.destroy({where: {id: req.params.id}});
+        const city = await Cities.findOne({where: {id: req.params.id}, attributes: ['id', 'name', 'longitude', 'latitude']});
+        await Cities.destroy({where: {id: req.params.id}});
         res.status(200).json(city);
     }catch(error){
         res.status(500).json({error})

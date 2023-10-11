@@ -10,7 +10,7 @@ import sequelize from "../dbConfig";
     longitude: DataTypes.FLOAT
   }, {
     sequelize,
-    modelName: 'City',
+    modelName: 'Cities',
   });
 
   export default Cities;

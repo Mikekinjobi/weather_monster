@@ -12,6 +12,7 @@ Webhooks.init({
     callback_url: sequelize_1.DataTypes.STRING
 }, {
     sequelize: dbConfig_1.default,
+    tableName: 'Webhooks',
     modelName: 'Webhooks',
 });
 exports.default = Webhooks;

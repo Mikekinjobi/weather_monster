@@ -13,6 +13,7 @@ Cities.init({
     longitude: sequelize_1.DataTypes.FLOAT
 }, {
     sequelize: dbConfig_1.default,
+    tableName: 'Cities',
     modelName: 'Cities',
 });
 exports.default = Cities;

@@ -1,6 +1,6 @@
 import express, {Request, Response} from 'express';
 import { Op } from 'sequelize';
-import Forecast from '../../models/forecast';
+import Forecasts from '../../models/forecast';
 import Temperature from '../../models/temperature';
 import moment from 'moment';
 
@@ -34,7 +34,7 @@ export const getForecast = async (req: Request , res: Response) => {
     const sample = forecastSample.length;
     min = Math.floor(min/sample);
     max = Math.floor(max/sample);
-    Forecast.create({
+    Forecasts.create({
         city_id, 
         max, 
         min, 

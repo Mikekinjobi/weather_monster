@@ -12,10 +12,10 @@ const sequelize = new Sequelize(DB_NAME!, DB_USER_NAME!, DB_PASSWORD , {
     dialect: DB_DIALECT as Dialect,
     logging: false,
     dialectOptions: {
-      encrypt: true,
       ssl: {
-        rejectUnauthorized: true,
-      },
+        require: true,
+        rejectUnauthorized: false
+      }
     },
   });
 
